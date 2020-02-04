@@ -36,14 +36,14 @@ You can also specify a shortcut name there.
 
 Change SHORTCUTNAME with the desired shortcut name.\
 Change also the PATH with the path of ssh_keyword.\
-You need to restart your terminal to take effect.\
+You need to restart your terminal to take effect.
 
 Run in terminal :
 ```
 printf 'SHORTCUTNAME() {\n    python PATH/ssh-keyword/ssh_keyword.py "$1" "$2"\n}' >> $HOME/.bashrc
 ```
 
-\
+
 If you are on **Windows**, you can add the directory of **ssh_keyword** to your env path to access it anywhere. 
 
 

@@ -14,11 +14,11 @@ Enter 'Quit' for exit
 
 Enter a user: john
 Port: 22
-Enter a list of name separate by ',': server, john
+Enter a list of names separate by ',': server, john
 Default server ([Y]es | [N]o): no
 
 python ssh_keyword.py -ls
-ip:192.168.1.250  user:jhon  port:22  keywords:['server', 'john']  default:False
+ip:192.168.1.250  user:john  port:22  keywords:['server', 'john']  default:False
 
 python ssh_keyword.py server
 ```

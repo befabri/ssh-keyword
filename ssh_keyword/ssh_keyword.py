@@ -73,7 +73,7 @@ def help():
 	print('Optional arguments:')
 	print('-a',' '*4, '--add', ' '*6, 'add a new connection (ssh_keyword -a [IP])')
 	print('-d',' '*4, '--default', ' '*2, 'add/change default connection (ssh_keyword -d [IP])')
-	print('-rm',' '*3, '--remove', ' '*3, 'remove connection (sshkeyword -rm [IP])')
+	print('-rm',' '*3, '--remove', ' '*3, 'remove connection (ssh_keyword -rm [IP])')
 	print('-ls',' '*3, '--list', ' '*5, 'list connection (ssh_keyword -ls or ssh_keyword -ls [IP])')
 	print('-e', ' '*4, '--edit', ' '*5, 'edit connection (ssh_keyword -e [IP])')
 	print('-h', ' '*4, '--help', ' '*5, 'show this help message and exit')

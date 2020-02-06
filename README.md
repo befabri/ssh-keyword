@@ -8,7 +8,7 @@ Example
 Your ssh host is 192.168.1.250.
 
 ```
-ssh_keyword -a 192.168.1.250
+$ ssh_keyword -a 192.168.1.250
 Entry for new connection
 Enter 'Quit' for exit
 
@@ -17,10 +17,10 @@ Port: 22
 Enter a list of names separate by ',': server, john
 Default server ([Y]es | [N]o): no
 
-python ssh_keyword.py -ls
+$ python ssh_keyword.py -ls
 ip:192.168.1.250  user:john  port:22  keywords:['server', 'john']  default:False
 
-python ssh_keyword.py server
+$ python ssh_keyword.py server
 ```
 You are now connected to 192.168.1.250 !
 

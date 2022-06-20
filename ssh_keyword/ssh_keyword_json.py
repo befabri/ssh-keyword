@@ -2,7 +2,7 @@ import sys, os, json
 
 class ManageJson(object):
     def __init__(self):
-        self.dir = 'data/'
+        self.dir = os.path.dirname(__file__)+'/data/'
         if self.readJson() == "Not exist":
             self.createJson()
         self.data = self.readJson()
@@ -16,6 +16,12 @@ class ManageJson(object):
         for i in self.data:
             if keyword in i.get('keywords'):
                 return i
+
+    def searchIndex(self, valeur):
+        return self.data[valeur]
+
+    def getLen(self):
+        return len(self.data)
 
     def readJson(self):
         try:
@@ -41,9 +47,11 @@ class ManageJson(object):
 
     def __str__(self):
         string = ''
+        x = 1
         for connection in self.data:
             ip, user = connection.get('ip'), connection.get('user')
             port, keyword = connection.get('port'), connection.get('keywords')
             default = connection.get('default')
-            string += f"ip:{ip}  user:{user}  port:{port}  keywords:{keyword}  default:{default}\n"
+            string += f"{x}. ip:{ip}  user:{user}  port:{port}  keywords:{keyword}  default:{default}\n"
+            x+=1
         return string

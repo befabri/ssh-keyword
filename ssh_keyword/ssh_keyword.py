@@ -1,8 +1,14 @@
 import sys
 from ssh_keyword_connection import Connection
-from ssh_keyword_tools import isIp
+from ssh_keyword_tools import isIp, checkQuit
 from ssh_keyword_json import ManageJson
 from subprocess import call
+
+"""
+- Faire en sorte qu'il n'y ait qu'un seul serveur par defaut
+- Faciliter l'edition des serveur comme auto completion
+- Plus de retour sur ce qu'il se passe : tentative de connexion...
+"""
 
 def main(args, value=None):
     if args in ['-a', '--add'] and value:
@@ -19,8 +25,26 @@ def main(args, value=None):
             print('Invalid')
     elif args in ['-rm', '--remove'] and value:
         if isIp(value):
-            connection = Connection(value)
-            connection.remove()
+            enter = input(f"Are you sure to delete {value} ? ([Y]es | [N]o) ")
+            checkQuit(enter)
+            if enter.lower() in ['y', 'yes']:
+                connection = Connection(value)
+                connection.remove()
+                search = ManageJson()
+                print(search)
+
+        elif value.isdigit():
+            value = int(value)
+            search = ManageJson()
+            if value <= search.getLen() and value > 0: 
+                value = search.searchIndex(value-1)
+                enter = input(f"Are you sure to delete {value.get('ip')} ? ([Y]es | [N]o) ")
+                checkQuit(enter)
+                if enter.lower() in ['y', 'yes']:
+                    connection = Connection(value.get('ip'))
+                    connection.remove()
+                    search = ManageJson()
+                    print(search)
         else:
             print('Invalid')
     elif args in ['-ls', '--list']:
@@ -43,8 +67,21 @@ def main(args, value=None):
         if isIp(value):
             connection = Connection(value)
             connection.edit()
+        elif value.isdigit():
+            value = int(value)
+            search = ManageJson()
+            if value <= search.getLen() and value > 0: 
+                value = search.searchIndex(value-1)
+                connection = Connection(value.get('ip'))
+                connection.edit()
         else:
+            search = ManageJson()
+            if search.searchList(value):
+                connection = search.searchList(value)
+                connection = Connection(connection.get('ip'))
+                connection.edit()
             print('Invalid')
+
     elif args != '-default':
         search = ManageJson()
         if search.searchList(args):
@@ -75,8 +112,8 @@ def help():
 	print('-d',' '*4, '--default', ' '*2, 'add/change default connection (ssh_keyword -d [IP])')
 	print('-rm',' '*3, '--remove', ' '*3, 'remove connection (ssh_keyword -rm [IP])')
 	print('-ls',' '*3, '--list', ' '*5, 'list connection (ssh_keyword -ls or ssh_keyword -ls [IP])')
-	print('-e', ' '*4, '--edit', ' '*5, 'edit connection (ssh_keyword -e [IP])')
-	print('-h', ' '*4, '--help', ' '*5, 'show this help message and exit')
+	print('-e', ' '*4, '--edit', ' '*5, 'edit connection (ssh_keyword -e [IP] or [List index])')
+	print('-h', ' '*4, '--help', ' '*5, 'show this help message')
 
 if __name__ == '__main__':
 

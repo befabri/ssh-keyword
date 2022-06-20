@@ -65,7 +65,7 @@ class Connection(object):
                 print('')
                 enter = input("What do you want to edit ([Q]uit for exit): ")
                 checkQuit(enter)
-                if enter.lower() in ['ip', 'user', 'port', 'keywords', 'default']:
+                if enter.lower() in ['ip', 'user', 'port', 'key', 'keys', 'keyword', 'keywords', 'default', 'def']:
                     editCo = CreateConnection()
                     if enter.lower() == 'ip':
                         ip = editCo.qIp()
@@ -81,14 +81,12 @@ class Connection(object):
                     elif enter == 'port':
                         self.update(connection, 'port', editCo.qPort())
                         print('Port edited')
-                    elif enter.lower() == 'keywords': 
+                    elif enter.lower() in ['key', 'keys', 'keyword', 'keywords']:
                         self.update(connection, 'keywords', editCo.qKeywords())
                         print('Keywords edited')
-                    elif enter.lower() == 'default': 
+                    elif enter.lower() in ['def', 'default']:
                         self.update(connection, 'default', editCo.qDefault())
                         print('Server default edited')
-                connection = self.getConnection(self.ip, 'ip')
-                print('')
         else:
             print("Connection not found")
 

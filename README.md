@@ -51,7 +51,7 @@ Now you can connect to your ssh host by typing `ssh_keyword [YOURKEYWORD]` or ju
 ## Help
 
 ```
-#ssh_keyword -h
+$ ssh_keyword -h
 
 Usage: ssh_keyword [OPTIONS option] or ssh_keyword [KEYWORD]
 Keyword recognition in ssh command

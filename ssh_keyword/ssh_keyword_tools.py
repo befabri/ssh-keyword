@@ -10,5 +10,5 @@ def isIp(ip):
 def checkQuit(enter):
     'Check if quit'
     if enter.lower() == 'quit' or enter.lower() == 'q':
-        print('Exit')
-        sys.exit()
+    	print('Exit')
+    	sys.exit()

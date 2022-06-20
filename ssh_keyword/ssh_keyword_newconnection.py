@@ -35,7 +35,7 @@ class CreateConnection(object):
 
     def qKeywords(self):
         while True:
-            enter = input("Enter a list of names separate by ',': ")
+            enter = input("Enter a list of name separate by ',': ")
             checkQuit(enter)
             try:
                 enter = enter.replace(' ', '').split(",")

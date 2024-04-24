@@ -151,9 +151,8 @@ func handleList(connections []config.Connection, value string) {
 		for _, conn := range connections {
 			fmt.Printf("IP: %s, User: %s, Port: %s, Keywords: %v, Default: %t\n", conn.IP, conn.User, conn.Port, conn.Keywords, conn.Default)
 		}
-	} else {
-		// TODO: Implement filtering by IP or other criteria if needed.
 	}
+	// TODO: Implement filtering by IP or other criteria if needed.
 }
 
 func handleEdit(connections []config.Connection, value string) {

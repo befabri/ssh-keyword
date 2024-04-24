@@ -1,4 +1,4 @@
-name: Build for Windows and Ubuntu
+name: Build and Release for Windows and Ubuntu
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
       - master
 
 jobs:
-  build:
+  build-and-release:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -34,3 +34,35 @@ jobs:
         with:
           name: ubuntu-binary
           path: ssh-keyword-cli
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.sha }}
+          draft: false
+          prerelease: false
+          body: "Description of the changes and assets included in this release."
+
+      - name: Upload Release Asset for Windows
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./ssh-keyword-cli.exe
+          asset_name: ssh-keyword-cli.exe
+          asset_content_type: application/octet-stream
+
+      - name: Upload Release Asset for Ubuntu
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./ssh-keyword-cli
+          asset_name: ssh-keyword-cli
+          asset_content_type: application/octet-stream

@@ -7,9 +7,9 @@ A CLI tool for managing SSH connections via keywords.
 Your ssh host is 192.168.1.250.
 
 ```
-$ ssh_keyword -a 192.168.1.250
+$ ssh-keyword -a 192.168.1.250
 Entry for new connection
-Enter 'Quit' for exit
+Enter 'quit' for exit
 
 Enter a user: john
 Port: 22
@@ -28,7 +28,7 @@ You are now connected to 192.168.1.250 !
 
 ### Windows
 
-To install on Windows, download the latest `.exe` file from the GitHub releases and add the directory containing `ssh_keyword.exe` to your environment path to access it from anywhere.
+To install on Windows, download the latest `.exe` file from the GitHub releases and add the directory containing `ssh-keyword.exe` to your environment path to access it from anywhere.
 
 ### Linux
 
@@ -36,7 +36,7 @@ To install `ssh-keyword` on Linux, follow these steps:
 
 1. Download the latest release from the GitHub repository:
 ```
-wget https://github.com/befabri/ssh-keyword/releases/download/v1.2.1/ssh-keyword-linux-amd64
+wget https://github.com/befabri/ssh-keyword/releases/download/v1.2.2/ssh-keyword-linux-amd64
 ```
 2. Make the executable accessible:
 ```
@@ -53,13 +53,13 @@ ssh-keyword -h
 
 ## Documentation
 
-First add your connection with `ssh_keyword -a [IP]`.\
-Now you can connect to your ssh host by typing `ssh_keyword [YOUR_KEYWORD]` or just `ssh_keyword` if you have set a default connection.
+First add your connection with `ssh-keyword -a [IP]`.\
+Now you can connect to your ssh host by typing `ssh-keyword [YOUR_KEYWORD]` or just `ssh-keyword` if you have set a default connection.
 
 ## Help
 
 ```
-$ ssh_keyword -h
+$ ssh-keyword -h
 
 Usage: ssh-keyword [keyword]
        ssh-keyword [options] [command]

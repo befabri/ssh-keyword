@@ -1,6 +1,6 @@
 # ssh-keyword
 
-A keywords ssh connection.
+A CLI tool for managing SSH connections via keywords.
 
 ## Example
 
@@ -16,52 +16,69 @@ Port: 22
 Enter a list of names separate by ',': server, john
 Default server ([Y]es | [N]o): no
 
-$ python ssh_keyword.py -ls
+$ ssh-keyword -ls
 ip:192.168.1.250  user:john  port:22  keywords:['server', 'john']  default:False
 
-$ python ssh_keyword.py server
+$ ssh-keyword server
 ```
 
 You are now connected to 192.168.1.250 !
 
 ## Installation
 
-For installation you can clone this repo.
+### Windows
 
-If you are on **Linux**, you can add **ssh_keyword** to `$HOME/.bashrc` to access it anywhere.\
-You can also specify a shortcut name there.
+To install on Windows, download the latest `.exe` file from the GitHub releases and add the directory containing `ssh_keyword.exe` to your environment path to access it from anywhere.
 
-Change SHORTCUTNAME with the desired shortcut name.\
-Change also the PATH with the path of ssh_keyword.\
-You need to restart your terminal to take effect.
+### Linux
 
-Run in terminal :
+To install `ssh-keyword` on Linux, follow these steps:
 
+1. Download the latest release from the GitHub repository:
 ```
-printf 'SHORTCUTNAME() {\n    python PATH/ssh-keyword/ssh_keyword.py "$1" "$2"\n}' >> $HOME/.bashrc
+wget https://github.com/befabri/ssh-keyword/releases/download/v1.2.1/ssh-keyword-linux-amd64
 ```
-
-If you are on **Windows**, you can add the directory of **ssh_keyword** to your env path to access it anywhere.
+2. Make the executable accessible:
+```
+chmod +x ssh-keyword-linux-amd64
+```
+3. Move the executable to a bin directory:
+```
+sudo mv ssh-keyword-linux-amd64 /usr/local/bin/ssh-keyword
+```
+4. Verify the installation by checking the version or help:
+```
+ssh-keyword -h
+```
 
 ## Documentation
 
 First add your connection with `ssh_keyword -a [IP]`.\
-Now you can connect to your ssh host by typing `ssh_keyword [YOURKEYWORD]` or just `ssh_keyword` if you have set a default connection.
+Now you can connect to your ssh host by typing `ssh_keyword [YOUR_KEYWORD]` or just `ssh_keyword` if you have set a default connection.
 
 ## Help
 
 ```
 $ ssh_keyword -h
 
-Usage: ssh_keyword [OPTIONS option] or ssh_keyword [KEYWORD]
-Keyword recognition in ssh command
-Specify a keyword in list of keywords of the connection
+Usage: ssh-keyword [keyword]
+       ssh-keyword [options] [command]
 
-Optional arguments:
--a      --add        add a new connection (ssh_keyword -a [IP])
--d      --default    add/change default connection (ssh_keyword -d [IP])
--rm     --remove     remove connection (ssh_keyword -rm [IP])
--ls     --list       list connection (ssh_keyword -ls or ssh_keyword -ls [IP])
--e      --edit       edit connection (ssh_keyword -e [IP] or [List index])
--h      --help       show this help message and exit
+Options:
+  -a,  --add [IP]            Add a connection using the specified IP address.
+  -d,  --default [IP]        Set the specified IP as the default connection.
+  -rm, --remove [IP|Index]   Remove the connection with the specified IP or at the given index.
+  -ls, --list [IP]           List all connections or a specific connection by IP.
+  -e,  --edit [IP|Index]     Edit the connection with the specified IP or at the given index.
+  -h,  --help                Show this help message and exit.
+
+Examples:
+  ssh-keyword server                 Connects directly to the connection labeled 'server'.
+  ssh-keyword --add 192.168.1.1      Add a connection for 192.168.1.1.
+  ssh-keyword --remove 192.168.1.1   Remove the connection for 192.168.1.1.
+  ssh-keyword --list                 List all connections.
+  ssh-keyword --edit 2               Edit the connection at index 2.
+  ssh-keyword --help                 Show the help message.
+
+Note: For removing or editing a connection, you can specify either the IP address or the index of the connection in the list.
 ```

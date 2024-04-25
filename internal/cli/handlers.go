@@ -2,8 +2,8 @@ package cli
 
 import (
 	"fmt"
-	"ssh-keyword-cli/internal/config"
-	"ssh-keyword-cli/internal/utils"
+	"ssh-keyword/internal/config"
+	"ssh-keyword/internal/utils"
 	"strconv"
 	"strings"
 )
@@ -235,23 +235,24 @@ func handleIp(connections []config.Connection, command string) {
 }
 
 func handleHelp() {
-	fmt.Println("SSH Connection Manager Help")
-	fmt.Println("Usage: go run main.go [command] [arguments]")
+	fmt.Println("Usage: ssh-keyword [keyword]")
+	fmt.Println("       ssh-keyword [options] [command]")
 	fmt.Println()
-	fmt.Println("Commands:")
-	fmt.Println("  -a,  --add [IP]            Add a new connection using the specified IP address.")
-	fmt.Println("  -d,  --default [IP]        Set the specified IP address as the default connection.")
-	fmt.Println("  -rm, --remove [IP|Index]   Remove the connection with the specified IP address or at the given index.")
-	fmt.Println("  -ls, --list [IP]           List all connections or the connection with the specified IP address.")
-	fmt.Println("  -e,  --edit [IP|Index]     Edit the connection with the specified IP address or at the given index.")
-	fmt.Println("  -h,  --help                Show this help message.")
+	fmt.Println("Options:")
+	fmt.Println("  -a,  --add [IP]            Add a connection using the specified IP address.")
+	fmt.Println("  -d,  --default [IP]        Set the specified IP as the default connection.")
+	fmt.Println("  -rm, --remove [IP|Index]   Remove the connection with the specified IP or at the given index.")
+	fmt.Println("  -ls, --list [IP]           List all connections or a specific connection by IP.")
+	fmt.Println("  -e,  --edit [IP|Index]     Edit the connection with the specified IP or at the given index.")
+	fmt.Println("  -h,  --help                Show this help message and exit.")
 	fmt.Println()
 	fmt.Println("Examples:")
-	fmt.Println("  go run main.go --add 192.168.1.1       Add a connection for 192.168.1.1.")
-	fmt.Println("  go run main.go --remove 192.168.1.1    Remove the connection for 192.168.1.1.")
-	fmt.Println("  go run main.go --list                  List all connections.")
-	fmt.Println("  go run main.go --edit                  Edit the connection at index 2.")
-	fmt.Println("  go run main.go --help                  Show the help message.")
+	fmt.Println("  ssh-keyword server                 Connects directly to the connection labeled 'server'.")
+	fmt.Println("  ssh-keyword --add 192.168.1.1      Add a connection for 192.168.1.1.")
+	fmt.Println("  ssh-keyword --remove 192.168.1.1   Remove the connection for 192.168.1.1.")
+	fmt.Println("  ssh-keyword --list                 List all connections.")
+	fmt.Println("  ssh-keyword --edit 2               Edit the connection at index 2.")
+	fmt.Println("  ssh-keyword --help                 Show the help message.")
 	fmt.Println()
 	fmt.Println("Note: For removing or editing a connection, you can specify either the IP address or the index of the connection in the list.")
 }

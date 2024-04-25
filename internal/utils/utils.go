@@ -6,7 +6,7 @@ import (
 	"net"
 	"os"
 	"os/exec"
-	"ssh-keyword-cli/internal/config"
+	"ssh-keyword/internal/config"
 	"strings"
 )
 

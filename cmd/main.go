@@ -3,8 +3,8 @@ package main
 import (
 	"fmt"
 	"os"
-	"ssh-keyword-cli/internal/cli"
-	"ssh-keyword-cli/internal/config"
+	"ssh-keyword/internal/cli"
+	"ssh-keyword/internal/config"
 )
 
 func main() {

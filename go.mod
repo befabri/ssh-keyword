@@ -1,3 +1,3 @@
-module ssh-keyword-cli
+module ssh-keyword
 
 go 1.21.6

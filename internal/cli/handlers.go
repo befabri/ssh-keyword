@@ -95,6 +95,9 @@ func handleAdd(connections []config.Connection, ip string) {
 		return
 	}
 	keywords := strings.Split(keywordsInput, ",")
+	for i, keyword := range keywords {
+		keywords[i] = strings.TrimSpace(keyword)
+	}
 
 	defaultInput, err := utils.PromptInput("Default server ([Y]es | [N]o): ")
 	if err != nil {
@@ -122,14 +125,7 @@ func handleAdd(connections []config.Connection, ip string) {
 }
 
 func handleRemove(connections []config.Connection, value string) {
-	indexToRemove := -1
-	for i, connection := range connections {
-		if connection.IP == value {
-			indexToRemove = i
-			break
-		}
-	}
-
+	indexToRemove := utils.FindConnectionIndex(connections, value)
 	if indexToRemove == -1 {
 		fmt.Println("Connection not found.")
 		return
@@ -148,32 +144,73 @@ func handleRemove(connections []config.Connection, value string) {
 func handleList(connections []config.Connection, value string) {
 	if value == "" {
 		fmt.Println("Listing all connections:")
-		for _, conn := range connections {
-			fmt.Printf("IP: %s, User: %s, Port: %s, Keywords: %v, Default: %t\n", conn.IP, conn.User, conn.Port, conn.Keywords, conn.Default)
+		for _, connection := range connections {
+			utils.Display(connection)
 		}
 	}
 	// TODO: Implement filtering by IP or other criteria if needed.
 }
 
 func handleEdit(connections []config.Connection, value string) {
-	for i, connection := range connections {
-		if connection.IP == value {
-			fmt.Println("Editing connection:", value)
-			connections[i].User = "newUser"
-			connections[i].Port = "2222"
-
-			err := config.SaveConnections(connections)
-			if err != nil {
-				fmt.Println("Failed to edit connection:", err)
-				return
-			}
-
-			fmt.Println("Connection edited successfully.")
-			return
-		}
+	indexToEdit := utils.FindConnectionIndex(connections, value)
+	if indexToEdit == -1 {
+		fmt.Println("Connection not found.")
+		return
 	}
 
-	fmt.Println("Connection not found.")
+	fmt.Printf("Editing connection for IP: %s\n", connections[indexToEdit].IP)
+	for {
+		fmt.Println()
+		utils.Display(connections[indexToEdit])
+		fieldToEdit, err := utils.PromptInput("Enter the field to edit (ip, user, port, keywords, default): ", false)
+		if err != nil {
+			fmt.Println("Error reading input:", err)
+			return
+		}
+
+		switch strings.ToLower(fieldToEdit) {
+		case "ip":
+			newIP, _ := utils.PromptInput("Enter new IP: ")
+			if utils.IsIP(newIP) {
+				connections[indexToEdit].IP = newIP
+			} else {
+				fmt.Println("Invalid IP address.")
+				continue
+			}
+		case "user":
+			newUser, _ := utils.PromptInput("Enter new user: ")
+			connections[indexToEdit].User = newUser
+		case "port":
+			newPort, _ := utils.PromptInput("Enter new port: ")
+			if _, err := strconv.Atoi(newPort); err == nil {
+				connections[indexToEdit].Port = newPort
+			} else {
+				fmt.Println("Invalid port.")
+				continue
+			}
+		case "keywords":
+			newKeywords, _ := utils.PromptInput("Enter new keywords (comma-separated): ")
+			keywordList := strings.Split(newKeywords, ",")
+			for i, keyword := range keywordList {
+				keywordList[i] = strings.TrimSpace(keyword)
+			}
+			connections[indexToEdit].Keywords = keywordList
+		case "default":
+			newDefault, _ := utils.PromptInput("Set as default? (yes/no): ")
+			connections[indexToEdit].Default = strings.ToLower(newDefault) == "yes" || strings.ToLower(newDefault) == "y"
+		case "quit":
+			err := config.SaveConnections(connections)
+			if err != nil {
+				fmt.Println("Failed to save changes:", err)
+				return
+			}
+			fmt.Println("Changes saved successfully.")
+			return
+		default:
+			fmt.Println("Invalid choice. Try again.")
+		}
+
+	}
 }
 
 func handleEditDefault(connections []config.Connection, value string) {

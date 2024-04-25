@@ -14,7 +14,12 @@ func IsIP(ip string) bool {
 	return net.ParseIP(ip) != nil
 }
 
-func PromptInput(question string) (string, error) {
+func PromptInput(question string, opts ...bool) (string, error) {
+	quit := true
+	if len(opts) > 0 {
+		quit = opts[0]
+	}
+
 	fmt.Println(question)
 	reader := bufio.NewReader(os.Stdin)
 	input, err := reader.ReadString('\n')
@@ -23,7 +28,7 @@ func PromptInput(question string) (string, error) {
 	}
 
 	input = strings.TrimSpace(input)
-	if strings.ToLower(input) == "quit" {
+	if quit && strings.ToLower(input) == "quit" {
 		return "", fmt.Errorf("operation cancelled")
 	}
 
@@ -47,6 +52,15 @@ func FindConnectionByIP(connections []config.Connection, ip string) (config.Conn
 		}
 	}
 	return config.Connection{}, false
+}
+
+func FindConnectionIndex(connections []config.Connection, ip string) int {
+	for i, connection := range connections {
+		if connection.IP == ip {
+			return i
+		}
+	}
+	return -1
 }
 
 func FindConnectionByKeyword(connections []config.Connection, keyword string) (config.Connection, bool) {
@@ -87,4 +101,9 @@ func SshToIP(ip string, user string, port string) {
 	if err != nil {
 		fmt.Println("Failed to connect:", err)
 	}
+}
+
+func Display(connection config.Connection) {
+	keywords := strings.Join(connection.Keywords, ", ")
+	fmt.Printf("ip: %s, user: %s, port: %s, keywords: [%s], default: %t\n", connection.IP, connection.User, connection.Port, keywords, connection.Default)
 }

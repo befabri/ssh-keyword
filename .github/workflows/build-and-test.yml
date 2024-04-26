@@ -1,4 +1,4 @@
-name: Build for Windows and Ubuntu
+name: Build and Test for Windows and Ubuntu
 
 on:
   push:
@@ -6,7 +6,22 @@ on:
       - master
 
 jobs:
-  build-and-release:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Go
+        uses: actions/setup-go@v3
+        with:
+          go-version: '1.21.6'
+
+      - name: Run Tests
+        run: go test ./...
+
+  build:
+    needs: test
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code

@@ -148,7 +148,6 @@ func handleList(connections []config.Connection, value string) {
 			utils.Display(connection)
 		}
 	}
-	// TODO: Implement filtering by IP or other criteria if needed.
 }
 
 func handleEdit(connections []config.Connection, value string) {
@@ -278,9 +277,9 @@ func handleHelp() {
 	fmt.Println("Options:")
 	fmt.Println("  -a,  --add [IP]            Add a connection using the specified IP address.")
 	fmt.Println("  -d,  --default [IP]        Set the specified IP as the default connection.")
-	fmt.Println("  -rm, --remove [IP|Index]   Remove the connection with the specified IP or at the given index.")
+	fmt.Println("  -rm, --remove [IP]   Remove the connection with the specified IP.")
 	fmt.Println("  -ls, --list [IP]           List all connections or a specific connection by IP.")
-	fmt.Println("  -e,  --edit [IP|Index]     Edit the connection with the specified IP or at the given index.")
+	fmt.Println("  -e,  --edit [IP]     Edit the connection with the specified IP.")
 	fmt.Println("  -h,  --help                Show this help message and exit.")
 	fmt.Println()
 	fmt.Println("Examples:")
@@ -288,8 +287,7 @@ func handleHelp() {
 	fmt.Println("  ssh-keyword --add 192.168.1.1      Add a connection for 192.168.1.1.")
 	fmt.Println("  ssh-keyword --remove 192.168.1.1   Remove the connection for 192.168.1.1.")
 	fmt.Println("  ssh-keyword --list                 List all connections.")
-	fmt.Println("  ssh-keyword --edit 2               Edit the connection at index 2.")
+	fmt.Println("  ssh-keyword --edit 192.168.1.1     Edit the connection for 192.168.1.1.")
 	fmt.Println("  ssh-keyword --help                 Show the help message.")
 	fmt.Println()
-	fmt.Println("Note: For removing or editing a connection, you can specify either the IP address or the index of the connection in the list.")
 }

@@ -79,6 +79,4 @@ Examples:
   ssh-keyword --list                 List all connections.
   ssh-keyword --edit 2               Edit the connection at index 2.
   ssh-keyword --help                 Show the help message.
-
-Note: For removing or editing a connection, you can specify either the IP address or the index of the connection in the list.
 ```

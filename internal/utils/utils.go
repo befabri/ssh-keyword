@@ -93,6 +93,7 @@ func Contains(slice []string, str string) bool {
 }
 
 func SshToIP(ip string, user string, port string) {
+	fmt.Printf("Connecting to server: %s@%s\n", user, ip)
 	cmd := exec.Command("ssh", fmt.Sprintf("%s@%s", user, ip), "-p", port)
 	cmd.Stdin = os.Stdin
 	cmd.Stdout = os.Stdout

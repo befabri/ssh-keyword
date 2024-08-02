@@ -17,5 +17,7 @@ func main() {
 			return
 		}
 	}
-	cli.HandleArgs(os.Args[1:], connections)
+	args := os.Args[1:]
+	cli := cli.NewCLI()
+	cli.HandleArgs(args, connections)
 }

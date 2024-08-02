@@ -67,9 +67,9 @@ Usage: ssh-keyword [keyword]
 Options:
   -a,  --add [IP]            Add a connection using the specified IP address.
   -d,  --default [IP]        Set the specified IP as the default connection.
-  -rm, --remove [IP|Index]   Remove the connection with the specified IP or at the given index.
+  -rm, --remove [IP]   Remove the connection with the specified IP.
   -ls, --list [IP]           List all connections or a specific connection by IP.
-  -e,  --edit [IP|Index]     Edit the connection with the specified IP or at the given index.
+  -e,  --edit [IP]     Edit the connection with the specified IP.
   -h,  --help                Show this help message and exit.
 
 Examples:
@@ -77,8 +77,6 @@ Examples:
   ssh-keyword --add 192.168.1.1      Add a connection for 192.168.1.1.
   ssh-keyword --remove 192.168.1.1   Remove the connection for 192.168.1.1.
   ssh-keyword --list                 List all connections.
-  ssh-keyword --edit 2               Edit the connection at index 2.
+  ssh-keyword --edit 192.168.1.1     Edit the connection for 192.168.1.1.
   ssh-keyword --help                 Show the help message.
-
-Note: For removing or editing a connection, you can specify either the IP address or the index of the connection in the list.
 ```

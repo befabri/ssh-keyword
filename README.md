@@ -65,18 +65,21 @@ Usage: ssh-keyword [keyword]
        ssh-keyword [options] [command]
 
 Options:
-  -a,  --add [IP]                   Add a connection using the specified IP address.
-  -d,  --default [IP]               Set the specified IP as the default connection.
-  -rm, --remove [IP]                Remove the connection with the specified IP.
-  -ls, --list [IP]                  List all connections or a specific connection by IP.
-  -e,  --edit [IP]                  Edit the connection with the specified IP.
-  -h,  --help                       Show this help message and exit.
+  -a,  --add [IP]                    Add a connection using the specified IP address.
+  -d,  --default [IP]                Set the specified IP as the default connection.
+  -rm, --remove [IP]                 Remove the connection with the specified IP.
+  -ls, --list [IP]                   List all connections or a specific connection by IP.
+  -e,  --edit [IP]                   Edit the connection with the specified IP.
+  -h,  --help                        Show this help message and exit.
 
 Examples:
-  ssh-keyword server                 Connects directly to the connection labeled 'server'.
-  ssh-keyword --add 192.168.1.1      Add a connection for 192.168.1.1.
-  ssh-keyword --remove 192.168.1.1   Remove the connection for 192.168.1.1.
-  ssh-keyword --list                 List all connections.
-  ssh-keyword --edit 192.168.1.1     Edit the connection for 192.168.1.1.
-  ssh-keyword --help                 Show the help message.
+  ssh-keyword                         Connects to the default connection.
+  ssh-keyword server                  Connects to the connection labeled 'server'.
+  ssh-keyword 192.168.1.1             Connects to 192.168.1.1.
+  ssh-keyword --default 192.168.1.1   Sets 192.168.1.1 as the default connection.
+  ssh-keyword --add 192.168.1.1       Add a connection for 192.168.1.1.
+  ssh-keyword --remove 192.168.1.1    Remove the connection for 192.168.1.1.
+  ssh-keyword --list                  List all connections.
+  ssh-keyword --edit 192.168.1.1      Edit the connection for 192.168.1.1.
+  ssh-keyword --help                  Show the help message.
 ```

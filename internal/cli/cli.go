@@ -28,7 +28,7 @@ func NewCLI() *CLI {
 
 	cli.handlers["ip"] = &handler.IpHandler{}
 	cli.handlers["keyword"] = &handler.KeywordHandler{}
-	cli.handlers["default"] = &handler.KeywordHandler{}
+	cli.handlers["default"] = &handler.DefaultHandler{}
 	return cli
 }
 

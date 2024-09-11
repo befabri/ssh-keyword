@@ -26,9 +26,11 @@ func (h *EditHandler) Handle(args []string, connections []config.Connection) {
 	for {
 		fmt.Println()
 		utils.Display(connections[indexToEdit])
-		fieldToEdit, err := utils.PromptInput("Enter the field to edit (ip, user, port, keywords, default): ", false)
+		fmt.Println("Enter the field to edit (ip, user, port, keywords, default). Type 'quit' to exit anytime.")
+		fieldToEdit, err := utils.PromptInput("Field to edit: ", false)
 		if err != nil {
-			fmt.Println("Error reading input:", err)
+			fmt.Println("")
+			fmt.Println(err)
 			return
 		}
 
@@ -70,7 +72,7 @@ func (h *EditHandler) Handle(args []string, connections []config.Connection) {
 			}
 			connections[indexToEdit].Keywords = keywordList
 		case "default":
-			newDefault, _ := utils.PromptInput("Set as default? (yes/no): ")
+			newDefault, _ := utils.PromptInput("Set as default? ([Y]es | [N]o): ")
 			if strings.ToLower(newDefault) == "y" || strings.ToLower(newDefault) == "yes" {
 				for i := range connections {
 					connections[i].Default = false

@@ -20,19 +20,24 @@ func PromptInput(question string, opts ...bool) (string, error) {
 		quit = opts[0]
 	}
 
-	fmt.Println(question)
-	reader := bufio.NewReader(os.Stdin)
-	input, err := reader.ReadString('\n')
-	if err != nil {
+	fmt.Print(question)
+
+	scanner := bufio.NewScanner(os.Stdin)
+	if scanner.Scan() {
+		input := strings.TrimSpace(scanner.Text())
+
+		if quit && strings.ToLower(input) == "quit" {
+			return "", fmt.Errorf("operation cancelled")
+		}
+
+		return input, nil
+	}
+
+	if err := scanner.Err(); err != nil {
 		return "", err
 	}
 
-	input = strings.TrimSpace(input)
-	if quit && strings.ToLower(input) == "quit" {
-		return "", fmt.Errorf("operation cancelled")
-	}
-
-	return input, nil
+	return "", fmt.Errorf("operation cancelled")
 }
 
 func ConfirmAction(question string) (bool, error) {

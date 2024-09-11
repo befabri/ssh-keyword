@@ -1,0 +1,31 @@
+version: '3'
+
+tasks:
+  default:
+    desc: "Run the project (Windows)"
+    cmds:
+      - go run ./cmd/main.go
+
+  build-win:
+    desc: "Build the project for Windows"
+    cmds:
+      - GOOS=windows GOARCH=amd64 go build -v -o ./bin/ssh-keyword.exe ./cmd/main.go
+    sources:
+      - "**/*.go"
+
+  build-linux:
+    desc: "Build the project for Linux"
+    cmds:
+      - GOOS=linux GOARCH=amd64 go build -v -o ./bin/ssh-keyword ./cmd/main.go
+    sources:
+      - "**/*.go"
+  
+  run-win:
+    desc: "Run the built ssh-keyword (Windows)"
+    cmds:
+      - ./bin/ssh-keyword.exe
+
+  run-linux:
+    desc: "Run the built ssh-keyword (Linux)"
+    cmds:
+      - ./bin/ssh-keyword
